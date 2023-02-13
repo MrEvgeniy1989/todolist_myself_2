@@ -1,26 +1,28 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
+import {Todolist} from './Todolist';
+import {v1} from 'uuid';
+
+export type TaskType = {
+    id: string
+    title: string
+    isDone: boolean
+}
 
 function App() {
+    let [tasks, setTasks] = useState<TaskType[]>([
+        {id: v1(), title: 'HTML&CSS', isDone: true},
+        {id: v1(), title: 'JS', isDone: true},
+        {id: v1(), title: 'ReactJS', isDone: false},
+        {id: v1(), title: 'rest api', isDone: false},
+        {id: v1(), title: 'graphQL', isDone: false}
+    ])
+
     return (
         <div className="App">
-            <div>
-                <h3>What to learn</h3>
-                <div>
-                    <input/>
-                    <button>+</button>
-                </div>
-                <ul>
-                    <li><input type="checkbox" checked={true}/> <span>HTML&CSS</span></li>
-                    <li><input type="checkbox" checked={true}/> <span>JS</span></li>
-                    <li><input type="checkbox" checked={false}/> <span>React</span></li>
-                </ul>
-                <div>
-                    <button>All</button>
-                    <button>Active</button>
-                    <button>Completed</button>
-                </div>
-            </div>
+            <Todolist
+                title={'What to learn'}
+            />
         </div>
     );
 }
